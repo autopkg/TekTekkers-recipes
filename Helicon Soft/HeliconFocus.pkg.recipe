@@ -8,6 +8,8 @@
 	<string>com.github.TekTekkers.pkg.HeliconFocus</string>
 	<key>Input</key>
 	<dict>
+		<key>BUNDLE_ID</key>
+		<string>com.heliconsoft.heliconfocus</string>
 		<key>NAME</key>
 		<string>HeliconFocus</string>
 	</dict>
