@@ -38,9 +38,9 @@
 			<key>Arguments</key>
 			<dict>
 				<key>input_path</key>
-				<string>%pathname%/Helicon3DViewer.app</string>
+				<string>%pathname%/HeliconFocus.app</string>
 				<key>requirement</key>
-				<string>identifier "com.heliconsoft.Helicon3DViewer" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = B7VP29TH87</string>
+				<string>"com.heliconsoft.heliconfocus" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = B7VP29TH87</string>
 				<key>DISABLE_CODE_SIGNATURE_VERIFICATION</key>
                                 <string>True</string>
 			</dict>
