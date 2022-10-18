@@ -29,7 +29,7 @@
 			<key>applications</key>
 			<string>%MUNKI_APPLICATIONS%</string>
 			<key>display_name</key>
-			<string>Helicon3DViewer</string>
+			<string>HeliconFocus</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
