@@ -9,7 +9,7 @@
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>HeliconFocus</string>
+		<string>Helicon3DViewer</string>
 		<key>DOWNLOAD_URL</key>
 		<string>https://www.heliconsoft.com/downloads/HeliconFocus.dmg</string>
 	</dict>
