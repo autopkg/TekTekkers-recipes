@@ -15,7 +15,7 @@
 		<key>MUNKI_CATEGORY</key>
 		<string>Developer</string>
 		<key>MUNKI_DEVELOPER</key>
-		<string>Axosoft</string>
+		<string>Helicon Soft Ltd</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>catalogs</key>
