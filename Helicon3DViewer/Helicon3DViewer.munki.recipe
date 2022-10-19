@@ -41,7 +41,7 @@
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
 	<key>ParentRecipe</key>
-	<string>com.github.TekTekkers.munki.Helicon3DViewer</string>
+	<string>com.github.TekTekkers.download.HeliconFocus</string>
 	<key>Process</key>
 	<array>
 		<dict>
