@@ -5,13 +5,15 @@
 	<key>Description</key>
 	<string>Downloads the latest version of Helicon3DViewer.</string>
 	<key>Identifier</key>
-	<string>ccom.github.TekTekkers.download.Helicon3DViewer</string>
+	<string>com.github.TekTekkers.download.Helicon3DViewer</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
 		<string>Helicon3DViewer</string>
 		<key>DOWNLOAD_URL</key>
 		<string>https://www.heliconsoft.com/downloads/HeliconFocus.dmg</string>
+		<key>ParentRecipe</key>
+        <string>com.github.TekTekkers.download.HeliconFocus</string>
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
