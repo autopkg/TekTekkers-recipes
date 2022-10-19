@@ -2,38 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Description</key>
-	<string>Downloads the latest version of Helicon3DViewer.</string>
-	<key>Identifier</key>
-	<string>com.github.TekTekkers.download.Helicon3DViewer</string>
-        <key>ParentRecipe</key>
-        <string>com.github.TekTekkers.download.HeliconFocus</string>
-	<key>Input</key>
-	<dict>
-		<key>NAME</key>
-		<string>HeliconFocus</string>
-		<key>DOWNLOAD_URL</key>
-		<string>https://www.heliconsoft.com/downloads/HeliconFocus.dmg</string>
-	</dict>
-	<key>MinimumVersion</key>
-	<string>1.0.0</string>
-	<key>Process</key>
-	<array>
-		<dict>
-			<key>Processor</key>
-			<string>URLDownloader</string>
-			<key>Arguments</key>
-			<dict>
-				<key>filename</key>
-				<string>%NAME%.dmg</string>
-				<key>url</key>
-				<string>%DOWNLOAD_URL%</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Processor</key>
-			<string>EndOfCheckPhase</string>
-		</dict>
+    <key>Description</key>
+    <string>Downloads the latest version of Helicon3DViewer.</string>
+    <key>Identifier</key>
+    <string>com.github.TekTekkers.download.Helicon3DViewer</string>
+    <key>ParentRecipe</key>
+    <string>com.github.TekTekkers.download.HeliconFocus</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>Helicon3DViewer</string>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>1.0.0</string>
+    <key>Process</key>
+    </dict>
 		<dict>
 			<key>Processor</key>
 			<string>CodeSignatureVerifier</string>
@@ -47,6 +30,7 @@
                 <true />
 			</dict>
 		</dict>
-	</array>
+    <array>
+    </array>
 </dict>
 </plist>
