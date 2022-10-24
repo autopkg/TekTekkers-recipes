@@ -3,18 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>Description</key>
-	<string>Downloads the latest version of Helicon3DViewer and imports it into Munki.</string>
+	<string>Downloads the latest version of HeliconFocus and imports it into Munki.</string>
 	<key>Identifier</key>
 	<string>com.github.TekTekkers.munki.Helicon3DViewer</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
-		<string>Helicon3DViewer</string>
+		<string>HeliconFocus</string>
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps</string>
 		<key>MUNKI_CATEGORY</key>
-		<string>applications</string>
-		<key>MUNKI_APPLICATIONS</key>
+		<string>Applications</string>
+		<key>MUNKI_DEVELOPER</key>
 		<string>Helicon Soft Ltd</string>
 		<key>pkginfo</key>
 		<dict>
@@ -29,7 +29,7 @@
 			<key>applications</key>
 			<string>%MUNKI_APPLICATIONS%</string>
 			<key>display_name</key>
-			<string>Helicon3DViewer</string>
+			<string>HeliconFocus</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
