@@ -20,7 +20,7 @@
 		<dict>
 			<key>catalogs</key>
 			<array>
-				<string>testing</string>
+			<string>testing</string>
 			</array>
 			<key>category</key>
 			<string>%MUNKI_CATEGORY%</string>
@@ -40,8 +40,6 @@
 	</dict>
 	<key>MinimumVersion</key>
 	<string>1.0.0</string>
-	<key>ParentRecipe</key>
-	<string>com.github.TekTekkers.download.HeliconFocus</string>
 	<key>Process</key>
 	<array>
 		<dict>
