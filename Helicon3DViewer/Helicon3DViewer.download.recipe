@@ -18,7 +18,6 @@
     		<string>applications</string>
     		<key>MUNKI_APPLICATIONS</key>
     		<string>Helicon Soft Ltd</string>
-    		<key>pkginfo</key>
     </dict>
     <key>MinimumVersion</key>
     <string>1.0.0</string>
