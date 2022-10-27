@@ -6,6 +6,8 @@
 	<string>Downloads the latest version of Helicon3DViewer and imports it into Munki.</string>
 	<key>Identifier</key>
 	<string>com.github.TekTekkers.munki.Helicon3DViewer</string>
+	<key>ParentRecipe</key>
+	<string>com.github.TekTekkers.download.Helicon3DViewer</string>
 	<key>Input</key>
 	<dict>
 		<key>NAME</key>
