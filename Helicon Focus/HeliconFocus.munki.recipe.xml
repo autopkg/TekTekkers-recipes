@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Imports Helicon Focus and Helicon 3D Viewer into Munki.</string>
+    <key>Identifier</key>
+    <string>com.github.TekTekkers.munki.HeliconFocus</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>HeliconFocus</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>apps/HeliconSoft</string>
+        <key>MUNKI_CATEGORY</key>
+        <string>Photography</string>
+        <key>description</key>
+		<string>Focus stacking software: a post-processing technique that extends the depth of field in your photographs</string>
+        <key>MUNKI_DEVELOPER</key>
+        <string>Helicon Soft Ltd.</string>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>1.0.0</string>
+    <key>ParentRecipe</key>
+    <string>com.github.TekTekkers.munki.HeliconFocus</string>
+    <key>Process</key>
+    <array>
+        <!-- Helicon Focus import step -->
+        <dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+            <key>Arguments</key>
+            <dict>
+                <key>munki_repo_subdir</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+                <key>pkginfo</key>
+                <dict>
+                    <key>catalogs</key>
+                    <array>
+                        <string>testing</string>
+                    </array>
+                    <key>category</key>
+                    <string>%MUNKI_CATEGORY%</string>
+                    <key>developer</key>
+                    <string>%MUNKI_DEVELOPER%</string>
+                    <key>display_name</key>
+                    <string>Helicon Focus</string>
+                    <key>name</key>
+                    <string>%NAME%</string>
+                    <key>version</key>
+                    <string>%version%</string>
+                    <key>unattended_install</key>
+                    <true/>
+                    <key>unattended_uninstall</key>
+                    <true/>
+                </dict>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+            </dict>
+        </dict>
+        <!-- Helicon 3D Viewer import step -->
+        <dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+            <key>Arguments</key>
+            <dict>
+                <key>munki_repo_subdir</key>
+                <string>%MUNKI_REPO_SUBDIR%/Helicon3DViewer</string>
+                <key>pkginfo</key>
+                <dict>
+                    <key>catalogs</key>
+                    <array>
+                        <string>testing</string>
+                    </array>
+                    <key>category</key>
+                    <string>%MUNKI_CATEGORY%</string>
+                    <key>developer</key>
+                    <string>%MUNKI_DEVELOPER%</string>
+                    <key>display_name</key>
+                    <string>Helicon 3D Viewer</string>
+                    <key>name</key>
+                    <string>Helicon3DViewer</string>
+                    <key>version</key>
+                    <string>%version%</string>
+                    <key>unattended_install</key>
+                    <true/>
+                    <key>unattended_uninstall</key>
+                    <true/>
+                </dict>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>
