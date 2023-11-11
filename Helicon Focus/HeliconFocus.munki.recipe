@@ -15,7 +15,7 @@
         <key>MUNKI_CATEGORY</key>
         <string>Photography</string>
         <key>description</key>
-		<string>Focus stacking software: a post-processing technique that extends the depth of field in your photographs</string>
+	<string>Focus stacking software: a post-processing technique that extends the depth of field in your photographs</string>
         <key>MUNKI_DEVELOPER</key>
         <string>Helicon Soft Ltd.</string>
     </dict>
