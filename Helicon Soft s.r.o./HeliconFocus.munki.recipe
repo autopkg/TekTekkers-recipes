@@ -2,9 +2,9 @@
 <plist version="1.0">
 <dict>
     <key>Comment</key>
-    <string>Downloads and installs the latest version of Helicon Focus and Helicon 3D Viewer, bypassing version checks.</string>
+    <string>Downloads and installs the latest version of Helicon Focus and Helicon 3D Viewer, removing any previous installations using pkgutil.</string>
     <key>Description</key>
-    <string>Downloads and installs the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app, and forces installation regardless of existing version.</string>
+    <string>Downloads and installs the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app, and removes previous installations if detected using pkgutil.</string>
     <key>Identifier</key>
     <string>com.github.TekTekkers.munki.HeliconFocus</string>
     <key>Input</key>
@@ -20,7 +20,7 @@
                 <string>testing</string>
             </array>
             <key>description</key>
-            <string>Helicon Focus is an advanced focus stacking software, also includes Helicon 3D Viewer.</string>
+            <string>Helicon Focus is an advanced focus stacking software that also includes Helicon 3D Viewer.</string>
             <key>developer</key>
             <string>Helicon Soft s.r.o.</string>
             <key>display_name</key>
@@ -28,26 +28,56 @@
             <key>name</key>
             <string>%NAME%</string>
             <key>version</key>
-            <string>8.2.3</string> <!-- Update as needed based on release tracking -->
+            <string>8.2.17</string> <!-- Update this version manually as needed -->
             <key>unattended_install</key>
             <true/>
             <key>preinstall_script</key>
             <string>#!/bin/bash
-# Remove any existing Helicon Focus and Helicon 3D Viewer apps before installing the new version
-if [ -d "/Applications/HeliconFocus.app" ]; then
-    /bin/rm -rf "/Applications/HeliconFocus.app"
+# Check if Helicon Focus or Helicon 3D Viewer is installed using pkgutil and remove them if found
+
+# Paths to the applications
+HELICON_FOCUS_PATH="/Applications/HeliconFocus.app"
+HELICON_3DVIEWER_PATH="/Applications/Helicon3DViewer.app"
+
+# Use pkgutil to check for receipts
+HELICON_FOCUS_RECEIPT=$(pkgutil --pkgs | grep -i "com.heliconsoft.heliconfocus")
+HELICON_3DVIEWER_RECEIPT=$(pkgutil --pkgs | grep -i "com.heliconsoft.Helicon3DViewer")
+
+# Remove the applications if they are present
+if [ -n "$HELICON_FOCUS_RECEIPT" ] || [ -d "$HELICON_FOCUS_PATH" ]; then
+    echo "Removing existing Helicon Focus installation..."
+    /bin/rm -rf "$HELICON_FOCUS_PATH"
+    if [ -n "$HELICON_FOCUS_RECEIPT" ]; then
+        pkgutil --forget "$HELICON_FOCUS_RECEIPT"
+    fi
 fi
-if [ -d "/Applications/Helicon3DViewer.app" ]; then
-    /bin/rm -rf "/Applications/Helicon3DViewer.app"
+
+if [ -n "$HELICON_3DVIEWER_RECEIPT" ] || [ -d "$HELICON_3DVIEWER_PATH" ]; then
+    echo "Removing existing Helicon 3D Viewer installation..."
+    /bin/rm -rf "$HELICON_3DVIEWER_PATH"
+    if [ -n "$HELICON_3DVIEWER_RECEIPT" ]; then
+        pkgutil --forget "$HELICON_3DVIEWER_RECEIPT"
+    fi
 fi</string>
             <key>install_check_script</key>
             <string>#!/bin/bash
-# Always return success to bypass version checking
-exit 0</string>
+# Use pkgutil to check if either Helicon Focus or Helicon 3D Viewer is already installed
+
+if [ -d "/Applications/HeliconFocus.app" ] || [ -d "/Applications/Helicon3DViewer.app" ]; then
+    echo "Helicon Focus or Helicon 3D Viewer is already installed."
+    exit 1
+else
+    exit 0
+fi</string>
             <key>uninstall_check_script</key>
             <string>#!/bin/bash
-# Always return success to bypass version checking
-exit 0</string>
+# Check if the applications exist for uninstall purposes
+
+if [ -d "/Applications/HeliconFocus.app" ] || [ -d "/Applications/Helicon3DViewer.app" ]; then
+    exit 0
+else
+    exit 1
+fi</string>
             <key>update_forced_install</key>
             <true/>
         </dict>
