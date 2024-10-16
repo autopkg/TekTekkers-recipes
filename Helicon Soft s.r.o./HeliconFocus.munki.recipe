@@ -2,9 +2,9 @@
 <plist version="1.0">
 <dict>
     <key>Comment</key>
-    <string>Downloads the latest version of Helicon Focus and Helicon 3D Viewer, and imports them into Munki.</string>
+    <string>Downloads the latest version of Helicon Focus and Helicon 3D Viewer, and imports them into Munki, with forced installation to overcome versioning issues.</string>
     <key>Description</key>
-    <string>Downloads the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app, and imports them into Munki.</string>
+    <string>Downloads and installs the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app, regardless of the existing installation status.</string>
     <key>Identifier</key>
     <string>com.github.TekTekkers.munki.HeliconFocus</string>
     <key>Input</key>
@@ -20,15 +20,28 @@
                 <string>testing</string>
             </array>
             <key>description</key>
-            <string>Helicon Focus is an advanced focus stacking software, also includes Helicon 3D Viewer.</string>
+            <string>Helicon Focus is an advanced focus stacking software that also includes Helicon 3D Viewer.</string>
             <key>developer</key>
             <string>Helicon Soft s.r.o.</string>
             <key>display_name</key>
-            <string>HeliconFocus</string>
+            <string>HeliconFocus and Helicon3DViewer</string>
             <key>name</key>
             <string>%NAME%</string>
             <key>unattended_install</key>
             <true/>
+            <key>unattended_uninstall</key>
+            <true/>
+            <key>version</key>
+            <string>8.2.14</string> <!-- Update this version manually as needed -->
+            <key>preinstall_script</key>
+            <string>#!/bin/bash
+# Remove any existing Helicon Focus and Helicon 3D Viewer apps before installing the new version
+if [ -d "/Applications/HeliconFocus.app" ]; then
+    /bin/rm -rf "/Applications/HeliconFocus.app"
+fi
+if [ -d "/Applications/Helicon3DViewer.app" ]; then
+    /bin/rm -rf "/Applications/Helicon3DViewer.app"
+fi</string>
             <key>postinstall_script</key>
             <string>#!/bin/bash
 #
@@ -52,6 +65,8 @@ else
     echo "Unable to determine the latest version."
     exit 1
 fi</string>
+            <key>update_forced_install</key>
+            <true/>
         </dict>
     </dict>
     <key>MinimumVersion</key>
