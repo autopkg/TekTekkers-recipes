@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Description</key>
+    <key>Comment</key>
     <string>Downloads the latest version of Helicon Focus and Helicon 3D Viewer.</string>
+    <key>Description</key>
+    <string>Downloads the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app.</string>
     <key>Identifier</key>
-    <string>com.github.tektekkers.download.heliconfocus</string>
+    <string>com.github.TekTekkers.download.HeliconFocus</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
         <string>HeliconFocus</string>
     </dict>
     <key>MinimumVersion</key>
-    <string>1.0.0</string>
+    <string>2.3</string>
     <key>Process</key>
     <array>
         <dict>
-            <key>Processor</key>
-            <string>HeliconFocusURLProvider</string>
-        </dict>
-        <dict>
             <key>Arguments</key>
             <dict>
-                <key>url</key>
-                <string>%url%</string>
                 <key>filename</key>
                 <string>%NAME%.dmg</string>
+                <key>url</key>
+                <string>https://www.heliconsoft.com/downloads/HeliconFocus.dmg</string>
             </dict>
             <key>Processor</key>
             <string>URLDownloader</string>
@@ -40,7 +37,7 @@
                 <key>input_path</key>
                 <string>%pathname%/HeliconFocus.app</string>
                 <key>requirement</key>
-                <string>identifier "com.heliconsoft.heliconfocus" and anchor apple generic</string>
+                <string>identifier "com.heliconsoft.heliconfocus" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y77YTV6QP3</string>
             </dict>
             <key>Processor</key>
             <string>CodeSignatureVerifier</string>
@@ -51,7 +48,7 @@
                 <key>input_path</key>
                 <string>%pathname%/Helicon3DViewer.app</string>
                 <key>requirement</key>
-                <string>identifier "com.heliconsoft.Helicon3DViewer" and anchor apple generic</string>
+                <string>identifier "com.heliconsoft.Helicon3DViewer" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y77YTV6QP3</string>
             </dict>
             <key>Processor</key>
             <string>CodeSignatureVerifier</string>
