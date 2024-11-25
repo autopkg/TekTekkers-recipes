@@ -2,74 +2,43 @@
 <plist version="1.0">
 <dict>
     <key>Comment</key>
-    <string>Downloads the latest version of Helicon Focus and Helicon 3D Viewer, and imports them into Munki.</string>
+    <string>Downloads the latest version of Helicon Focus and Helicon 3D Viewer.</string>
     <key>Description</key>
-    <string>Downloads the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app, and imports them into Munki.</string>
+    <string>Downloads the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app.</string>
     <key>Identifier</key>
-    <string>com.github.TekTekkers.munki.HeliconFocus</string>
+    <string>com.github.TekTekkers.download.HeliconFocus</string>
     <key>Input</key>
     <dict>
-        <key>MUNKI_REPO_SUBDIR</key>
-        <string>apps/%NAME%</string>
         <key>NAME</key>
         <string>HeliconFocus</string>
-        <key>pkginfo</key>
-        <dict>
-            <key>catalogs</key>
-            <array>
-                <string>testing</string>
-            </array>
-            <key>description</key>
-            <string>Helicon Focus is an advanced focus stacking software, including Helicon 3D Viewer for 3D visualization.</string>
-            <key>developer</key>
-            <string>Helicon Soft s.r.o.</string>
-            <key>display_name</key>
-            <string>HeliconFocus</string>
-            <key>name</key>
-            <string>%NAME%</string>
-            <key>unattended_install</key>
-            <true/>
-            <key>postinstall_script</key>
-            <string>#!/bin/bash
-#
-# Fetch the latest version of Helicon Focus from the website
-#
-
-LATEST_VERSION=$(curl -s "https://www.heliconsoft.com/helicon-focus-history-of-changes-mac/" | grep -o "Helicon Focus Mac (Lite, Pro, Premium) [0-9.]*" | head -n 1 | awk '{print $6}')
-
-if [ -n "$LATEST_VERSION" ]; then
-    echo "Latest version found: $LATEST_VERSION"
-    # Update the version key dynamically in the package information
-    PLIST_PATH="/Library/Managed Installs/manifests/$MUNKI_REPO_SUBDIR/%NAME%.plist"
-    if [ -f "$PLIST_PATH" ]; then
-        /usr/bin/defaults write "$PLIST_PATH" version "$LATEST_VERSION"
-        echo "Version updated in Munki pkginfo: $LATEST_VERSION"
-    else
-        echo "Package information plist not found at: $PLIST_PATH"
-        exit 1
-    fi
-else
-    echo "Unable to determine the latest version."
-    exit 1
-fi</string>
-        </dict>
     </dict>
     <key>MinimumVersion</key>
     <string>2.3</string>
-    <key>ParentRecipe</key>
-    <string>com.github.TekTekkers.download.HeliconFocus</string>
     <key>Process</key>
     <array>
         <dict>
             <key>Arguments</key>
             <dict>
-                <key>pkg_path</key>
-                <string>%pathname%</string>
-                <key>repo_subdirectory</key>
-                <string>%MUNKI_REPO_SUBDIR%</string>
+                <key>filename</key>
+                <string>%NAME%.dmg</string>
+                <key>url</key>
+                <string>
+    # Dynamic version extraction
+    LATEST_VERSION=$(curl -s "https://www.heliconsoft.com/helicon-focus-history-of-changes-mac/" | grep -o "Helicon Focus Mac (Lite, Pro, Premium) [0-9.]*" | head -n 1 | awk '{print $6}')
+    echo "Extracted version: $LATEST_VERSION"
+    if [ -z "$LATEST_VERSION" ]; then
+        echo "Failed to fetch latest version."
+        exit 1
+    fi
+    echo "URL Generated: https://www.heliconsoft.com/downloads/HeliconFocus_${LATEST_VERSION}.dmg"
+    </string>
             </dict>
             <key>Processor</key>
-            <string>MunkiImporter</string>
+            <string>URLDownloader</string>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>EndOfCheckPhase</string>
         </dict>
         <dict>
             <key>Arguments</key>
