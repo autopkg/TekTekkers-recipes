@@ -1,37 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Comment</key>
-    <string>Downloads the latest version of Helicon Focus and Helicon 3D Viewer.</string>
     <key>Description</key>
-    <string>Downloads the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app.</string>
+    <string>Downloads the latest version of Helicon Focus and Helicon 3D Viewer.</string>
     <key>Identifier</key>
-    <string>com.github.TekTekkers.download.HeliconFocus</string>
+    <string>com.github.tektekkers.download.heliconfocus</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
         <string>HeliconFocus</string>
     </dict>
     <key>MinimumVersion</key>
-    <string>2.3</string>
+    <string>1.0.0</string>
     <key>Process</key>
     <array>
         <dict>
+            <key>Processor</key>
+            <string>HeliconFocusURLProvider</string>
+        </dict>
+        <dict>
             <key>Arguments</key>
             <dict>
+                <key>url</key>
+                <string>%url%</string>
                 <key>filename</key>
                 <string>%NAME%.dmg</string>
-                <key>url</key>
-                <string>
-    # Dynamic version extraction
-    LATEST_VERSION=$(curl -s "https://www.heliconsoft.com/helicon-focus-history-of-changes-mac/" | grep -o "Helicon Focus Mac (Lite, Pro, Premium) [0-9.]*" | head -n 1 | awk '{print $6}')
-    echo "Extracted version: $LATEST_VERSION"
-    if [ -z "$LATEST_VERSION" ]; then
-        echo "Failed to fetch latest version."
-        exit 1
-    fi
-    echo "URL Generated: https://www.heliconsoft.com/downloads/HeliconFocus_${LATEST_VERSION}.dmg"
-    </string>
             </dict>
             <key>Processor</key>
             <string>URLDownloader</string>
@@ -46,23 +40,11 @@
                 <key>input_path</key>
                 <string>%pathname%/HeliconFocus.app</string>
                 <key>requirement</key>
-                <string>identifier "com.heliconsoft.heliconfocus" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y77YTV6QP3</string>
+                <string>identifier "com.heliconsoft.heliconfocus" and anchor apple generic</string>
             </dict>
             <key>Processor</key>
             <string>CodeSignatureVerifier</string>
         </dict>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>input_path</key>
-                <string>%pathname%/Helicon3DViewer.app</string>
-                <key>requirement</key>
-                <string>identifier "com.heliconsoft.Helicon3DViewer" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y77YTV6QP3</string>
-            </dict>
-            <key>Processor</key>
-            <string>CodeSignatureVerifier</string>
-        </dict>
-    
         <dict>
             <key>Arguments</key>
             <dict>
@@ -77,4 +59,3 @@
     </array>
 </dict>
 </plist>
-
