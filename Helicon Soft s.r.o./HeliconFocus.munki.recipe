@@ -20,7 +20,7 @@
                 <string>testing</string>
             </array>
             <key>description</key>
-            <string>Helicon Focus is an advanced focus stacking software, also includes Helicon 3D Viewer.</string>
+            <string>Helicon Focus is an advanced focus stacking software, including Helicon 3D Viewer for 3D visualization.</string>
             <key>developer</key>
             <string>Helicon Soft s.r.o.</string>
             <key>display_name</key>
@@ -93,6 +93,19 @@ fi</string>
             <key>Processor</key>
             <string>CodeSignatureVerifier</string>
         </dict>
+    
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>input_path</key>
+                <string>%pathname%/Helicon3DViewer.app</string>
+                <key>requirement</key>
+                <string>identifier "com.heliconsoft.Helicon3DViewer" and anchor apple generic</string>
+            </dict>
+            <key>Processor</key>
+            <string>CodeSignatureVerifier</string>
+        </dict>
     </array>
 </dict>
 </plist>
+
