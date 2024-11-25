@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Comment</key>
-    <string>Downloads the latest version of Helicon Focus and Helicon 3D Viewer, and imports them into Munki.</string>
     <key>Description</key>
-    <string>Downloads the latest version of Helicon Focus, including both HeliconFocus.app and Helicon3DViewer.app, and imports them into Munki.</string>
+    <string>Packages Helicon Focus and Helicon 3D Viewer for Munki.</string>
     <key>Identifier</key>
-    <string>com.github.TekTekkers.munki.HeliconFocus</string>
+    <string>com.github.tektekkers.munki.heliconfocus</string>
     <key>Input</key>
     <dict>
-        <key>MUNKI_REPO_SUBDIR</key>
-        <string>apps/%NAME%</string>
         <key>NAME</key>
         <string>HeliconFocus</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>apps/HeliconFocus</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -26,38 +25,13 @@
             <key>display_name</key>
             <string>HeliconFocus</string>
             <key>name</key>
-            <string>%NAME%</string>
-            <key>unattended_install</key>
-            <true/>
-            <key>postinstall_script</key>
-            <string>#!/bin/bash
-#
-# Fetch the latest version of Helicon Focus from the website
-#
-
-LATEST_VERSION=$(curl -s "https://www.heliconsoft.com/helicon-focus-history-of-changes-mac/" | grep -o "Helicon Focus Mac (Lite, Pro, Premium) [0-9.]*" | head -n 1 | awk '{print $6}')
-
-if [ -n "$LATEST_VERSION" ]; then
-    echo "Latest version found: $LATEST_VERSION"
-    # Update the version key dynamically in the package information
-    PLIST_PATH="/Library/Managed Installs/manifests/$MUNKI_REPO_SUBDIR/%NAME%.plist"
-    if [ -f "$PLIST_PATH" ]; then
-        /usr/bin/defaults write "$PLIST_PATH" version "$LATEST_VERSION"
-        echo "Version updated in Munki pkginfo: $LATEST_VERSION"
-    else
-        echo "Package information plist not found at: $PLIST_PATH"
-        exit 1
-    fi
-else
-    echo "Unable to determine the latest version."
-    exit 1
-fi</string>
+            <string>HeliconFocus</string>
         </dict>
     </dict>
     <key>MinimumVersion</key>
-    <string>2.3</string>
+    <string>1.0.0</string>
     <key>ParentRecipe</key>
-    <string>com.github.TekTekkers.download.HeliconFocus</string>
+    <string>com.github.tektekkers.download.heliconfocus</string>
     <key>Process</key>
     <array>
         <dict>
@@ -71,41 +45,6 @@ fi</string>
             <key>Processor</key>
             <string>MunkiImporter</string>
         </dict>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>input_path</key>
-                <string>%pathname%/HeliconFocus.app</string>
-                <key>requirement</key>
-                <string>identifier "com.heliconsoft.heliconfocus" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y77YTV6QP3</string>
-            </dict>
-            <key>Processor</key>
-            <string>CodeSignatureVerifier</string>
-        </dict>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>input_path</key>
-                <string>%pathname%/Helicon3DViewer.app</string>
-                <key>requirement</key>
-                <string>identifier "com.heliconsoft.Helicon3DViewer" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y77YTV6QP3</string>
-            </dict>
-            <key>Processor</key>
-            <string>CodeSignatureVerifier</string>
-        </dict>
-    
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>input_path</key>
-                <string>%pathname%/Helicon3DViewer.app</string>
-                <key>requirement</key>
-                <string>identifier "com.heliconsoft.Helicon3DViewer" and anchor apple generic</string>
-            </dict>
-            <key>Processor</key>
-            <string>CodeSignatureVerifier</string>
-        </dict>
     </array>
 </dict>
 </plist>
-
