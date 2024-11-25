@@ -22,7 +22,16 @@
                 <key>filename</key>
                 <string>%NAME%.dmg</string>
                 <key>url</key>
-                <string>https://www.heliconsoft.com/downloads/HeliconFocus.dmg</string>
+                <string>
+    # Dynamic version extraction
+    LATEST_VERSION=$(curl -s "https://www.heliconsoft.com/helicon-focus-history-of-changes-mac/" | grep -o "Helicon Focus Mac (Lite, Pro, Premium) [0-9.]*" | head -n 1 | awk '{print $6}')
+    echo "Extracted version: $LATEST_VERSION"
+    if [ -z "$LATEST_VERSION" ]; then
+        echo "Failed to fetch latest version."
+        exit 1
+    fi
+    echo "URL Generated: https://www.heliconsoft.com/downloads/HeliconFocus_${LATEST_VERSION}.dmg"
+    </string>
             </dict>
             <key>Processor</key>
             <string>URLDownloader</string>
